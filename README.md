@@ -90,11 +90,28 @@ ALTER TABLE tabela
 RENAME TO nome_novo;
 ```
 
-Em caso de excluir uma coluna é possível utilizar
+Em caso de excluir uma coluna é possível utilizar:
 
 ``` sql
 ALTER TABLE tabela
 DROP COLUMN profissao;
+```
+
+Se o interesse for alterar a informação de um campo em uma instância utiliza-se o comando mostrado abaixo.  LIMIT define o número de alterações que podem ocorrer com o comando, pode ser interessante para evitar futuros erros.
+
+``` sql
+UPDATE tabela
+SET column1 = "correção", column2 = "outra correção"
+WHERE id = "cod"
+LIMIT 1;
+```
+
+Para excluir linhas de uma tabela pode ser utilizada a função DELETE, que também permite a o uso da função LIMIT. Ainda é possível exluir todas as instâncias de uma tabela com a função TRUNCATE, mas mantém a estrutura da tabela.
+
+``` sql
+DELETE FROM tabela
+WHERE column = "erro"
+LIMIT 3;
 ```
 
 E caso seja necessário apagar o banco de dados, é possível utilizar o comando (MAS MUITO CUIDADO COM ISSO):
