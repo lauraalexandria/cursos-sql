@@ -4,6 +4,8 @@
 - Uma tabela é um conjunto de instâncias;
 - Uma instância é composta de campos/características;
 
+DUMP é uma cópia do banco de dados e contém todos os comandos necessários para a criação dos dados.
+
 ## Para criar os esquemas e dados
 
 Para criar um esquema de banco de dados:
