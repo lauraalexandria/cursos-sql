@@ -122,6 +122,107 @@ E caso seja necessário apagar o banco de dados, é possível utilizar o comando
 DROP DATABASE bancodedados; 
 ```
 
+## Seleção de Observações
 
+Com o comando SELECT é possível selecionar colunas e visualizá-las. Quando uitlizamos * todas as colunas são selecionadas.
 
+``` sql
+SELECT column 
+FROM tabela; 
+
+SELECT * 
+FROM tabela; 
+```
+
+É possível implementar ainda a forma como essas informações serão mostradas, por exemplo ordenando a partir de algum valor. No primeiro exemplo é a versão crescente e a segunda decrescente. Também permite a ordenação a partir de mais de uma coluna
+
+``` sql
+SELECT column FROM tabela
+ORDER BY column; 
+
+SELECT column FROM tabela
+ORDER BY column DESC; 
+```
+
+Para filtrar as linhas é utilizada o comando WHERE. Os sinais que são utilizados para as inequações são =, <, <=, >, >= ou !=, além de outros comandos específicos. NO segundo exemplo a seleção ocorre para todos os valores presentes entre a sequência e no terceiro considera apenas os valores entre parênteses. Operadores lógicos também podem ser adicionados com AND e OR.
+
+``` sql
+SELECT column FROM tabela
+WHERE column = 'obs'; 
+
+SELECT column FROM tabela
+WHERE column BETWEEN 2014 AND 2016; 
+
+SELECT column FROM tabela
+WHERE column IN (2014, 2016); 
+
+SELECT column FROM tabela
+WHERE column > 5 AND column2 < 10; 
+```
+
+O operador LIKE permite que a seleção seja feita observando padrões nas strings. O % indica a presença de qualquer outro caracter (inclusive o nenhum caracter), e pode ser posicionado no início, no final ou até no meio. Lembrando que o SQL não é case sensitve, e não faz distinção entre maiúsculo e minúsculo. No terceiro caso tudo é selecionado com exceção do que segue o padrão. Já o _ obriga que exista algum caracter na posição definada
+
+``` sql
+SELECT column FROM tabela
+WHERE column LIKE 'P%'; 
+
+SELECT column FROM tabela
+WHERE column LIKE '%A%'; 
+
+SELECT column FROM tabela
+WHERE column NOT LIKE 'P%'; 
+
+SELECT column FROM tabela
+WHERE column LIKE 'P%_'; 
+``` 
+
+O comando DISTINCT seleciona apenas os primeiros registros que possuem certa categoria.
+
+``` sql
+SELECT DISTINCT column FROM tabela; 
+```
+
+A seguir estão algumas funções de agregação. Com COUNT é possível contar o número de registros no banco de dados. Enquanto MAX mostra a maior observação da coluna, semelhante ao MIN. Além de SUM realizar a soma dos valores da coluna definida ou a média com AVG. 
+
+``` sql
+SELECT COUNT(*) FROM tabela; 
+
+SELECT COUNT(*) FROM tabela
+WHERE column = 'obs'; 
+
+SELECT MAX(column) FROM tabela; 
+
+SELECT SUM(column) FROM tabela; 
+```
+
+Com o GROUP BY os comandos são aplicados considerando cada uma das categorias presente na coluna definada separadamente e um valor é calculado para cada. No primeiro exemplo o resultado mostra apenas as categorias existentes. No segundo comando, além de mostrar as classes, uma nova coluna é adicionada com o valor referente a cada classe. Após realizar um agrupamento, em caso de realizar um filtro nas categorias definidas, deve-se utilizar o HAVING.
+
+``` sql
+SELECT column FROM tabela
+GROUP BY column; 
+
+SELECT column, COUNT(*) FROM tabela
+GROUP BY column;
+
+SELECT column, COUNT(*)  FROM tabela
+WHERE column2 = 'obs'
+GROUP BY column;
+
+SELECT column, COUNT(*) FROM tabela
+GROUP BY column
+ORDER BY COUNT(*);
+
+SELECT column, COUNT(*) FROM tabela
+GROUP BY column
+HAVING column > 10
+ORDER BY COUNT(*);
+```
+
+Utilizando um SELECT dentro de outro SELECT. Nesse caso os valores utilizados para agrupar são apenas os maiores que a média geral.
+
+```sql
+SELECT column, COUNT(*) FROM tabela
+GROUP BY column
+HAVING column > (SELECT AVG(column) FROM tabela)
+```
 
