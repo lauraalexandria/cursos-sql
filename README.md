@@ -226,3 +226,45 @@ GROUP BY column
 HAVING column > (SELECT AVG(column) FROM tabela)
 ```
 
+## Junção de Tabelas
+
+Primeiro, para realizar a adição de uma chave estrangeira, utilizando a chave de outra tabela, é possível utilizar:
+
+``` sql
+ALTER TABLE tabela
+ADD FOREIGN KEY (idtabela2) 
+REFERENCES tabela2(id);
+```
+
+A junção entre dois bancos de dados pode ser feita da seguinte forma. Se o ON não é utilizado, todos os registros são ligados a todos os ids da segunda tabelas e existe uma repetição.
+
+```sql
+SELECT tabela1.id, tabela1.nome, tabela2.id, tabela2.info
+FROM tabela1 JOIN tabela2 
+ON tabela1.idtabela2 = tabela2.id;
+```
+
+Outros tipos de JOIN são:
+
+![image](https://user-images.githubusercontent.com/57160675/167412801-2f57b694-7b6a-445d-8dda-51af46174415.png)
+
+Também é possível utilizar abreviações no comando, afim de diminuir o tamanho do código
+
+```sql
+SELECT t1.id, t1.nome, t2.id, t2.info 
+FROM tabela1 t1
+JOIN tabela2 t2
+ON t1.idtabela2 = t2.id;
+```
+
+E para encadear uma nova junção 
+
+```sql
+SELECT * FROM tabela1 t1
+JOIN tabela2 t2
+ON t1.idtabela2 = t2.id
+JOIN tabela3 t3
+ON t1.idtabela3 = t3.id;
+```
+
+
