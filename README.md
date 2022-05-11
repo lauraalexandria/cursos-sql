@@ -30,10 +30,10 @@ CREATE IF NOT EXISTS TABLE tabela (
   id int NOT NULL AUTO_INCREMENT,
   nome varchar(30) NOT NULL,
   nascimento date,
-  sexo enum("M", "F"),
+  sexo enum('M', 'F'),
   peso decimal(5,2),
   altura decimal(3,2),
-  nacionalidade varchar(20) DEFAULT "Brasil",
+  nacionalidade varchar(20) DEFAULT 'Brasil',
   PRIMARY KEY(id)
 ) DEFAULT CHARSET = utf8;
 ```
@@ -51,7 +51,7 @@ Outras possibilidades de tipos para os campos são:
 
 ![Captura de Tela (127)](https://user-images.githubusercontent.com/57160675/167003960-6957a2b8-b5b8-4c48-8a3a-7fe7a9d5f936.png)
 
-Também é possível conferir a estrutura final da tabela a partir do comando:
+Para conferir a estrutura final da tabela a partir do comando. Caso um banco de dados específico não esteja ativado, o nome da tabela também pode ser escrito na forma bancodedados.tabela .
 
 ``` sql
 DESCRIBE tabela; 
@@ -182,6 +182,13 @@ O comando DISTINCT seleciona apenas os primeiros registros que possuem certa cat
 SELECT DISTINCT column FROM tabela; 
 ```
 
+Outra função útil para a observação inicial do banco de dados é a TOP N, que mostra os n primeiros registros da tabela.
+
+``` sql
+SELECT TOP 10 * 
+FROM tabela; 
+```
+
 A seguir estão algumas funções de agregação. Com COUNT é possível contar o número de registros no banco de dados. Enquanto MAX mostra a maior observação da coluna, semelhante ao MIN. Além de SUM realizar a soma dos valores da coluna definida ou a média com AVG. 
 
 ``` sql
@@ -218,6 +225,14 @@ HAVING column > 10
 ORDER BY COUNT(*);
 ```
 
+Ainda é possível nomear essas novas relações quando realizamos a consulta, como pode ser visto a seguir.
+
+``` sql
+SELECT column, COUNT(*) AS "Frequência"
+FROM tabela
+GROUP BY column; 
+```
+
 Utilizando um SELECT dentro de outro SELECT. Nesse caso os valores utilizados para agrupar são apenas os maiores que a média geral.
 
 ```sql
@@ -236,7 +251,7 @@ ADD FOREIGN KEY (idtabela2)
 REFERENCES tabela2(id);
 ```
 
-A junção entre dois bancos de dados pode ser feita da seguinte forma. Se o ON não é utilizado, todos os registros são ligados a todos os ids da segunda tabelas e existe uma repetição.
+A junção entre dois bancos de dados pode ser feita da seguinte forma. Se o ON não é utilizado, todos os registros são ligados a todos os ids da segunda tabelas e existe uma repetição. É importante definir de qual tabela a coluna pertence para evitar que colunas com o mesmo nome sejam confudidas.
 
 ```sql
 SELECT tabela1.id, tabela1.nome, tabela2.id, tabela2.info
@@ -267,4 +282,4 @@ JOIN tabela3 t3
 ON t1.idtabela3 = t3.id;
 ```
 
-
+Continua na parte de UNION
