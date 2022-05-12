@@ -233,7 +233,29 @@ FROM tabela
 GROUP BY column; 
 ```
 
-Utilizando um SELECT dentro de outro SELECT. Nesse caso os valores utilizados para agrupar são apenas os maiores que a média geral.
+Outras funções que permitam o tratamento dos dados podem ser observadas. Com o comando DATEPART pode ser realizada a extração de dados em datas. Enquanto CONCAT concatena strings e colunas. Os comandos UPPER e LOWER fazem com que todas as letras da string fiquem maiúsculas ou minúsculas, respectivamente. E para obter o tamanho da string, pode-se utilizar a função LEN. SUBSTRING permite a seleção de uma parte da string definida. E por fim, também é possível substituir um padrão por outro com REPLACE.
+
+```sql
+SELECT DATEPART(DAY, data) AS Dia, DATEPART(MONTH, data) AS Mes, DATEPART(YEAR, data) AS Ano
+FROM tabela
+
+SELECT CONCAT(FirstName, LastName) AS Nome 
+FROM tabela
+
+SELECT UPPER(FirstName) AS Maiusculo, LOWER(LastName) AS Minusculo 
+FROM tabela
+
+SELECT FirstName, LEN(FirstName) AS Tamanho  
+FROM tabela
+
+SELECT FirstName, SUBSTRING(FirstName, 1, 3) AS TresPrimeiras
+FROM tabela 
+
+SELECT ProductNumber, REPLACE(ProductNumber, '-','#') AS Trocado
+FROM tabela
+```
+
+Utilizando um SELECT dentro de outro SELECT. Nesse caso os valores utilizados para agrupar são apenas os maiores que a média geral. Também conhecido como subquery.
 
 ```sql
 SELECT column, COUNT(*) FROM tabela
