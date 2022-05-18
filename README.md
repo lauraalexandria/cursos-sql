@@ -14,7 +14,7 @@ Para criar um esquema de banco de dados:
 CREATE DATABASE bancodedados; 
 ```
 
-Para configurar a estrutura do banco de dados, como por exemplo utilizar a configuração UTF-8 como padrão, ao criar o banco de dados é possível utilizar os comandos:
+Para configurar a estrutura do banco de dados, por exemplo, utilizar a configuração UTF-8 como padrão, deve-se utilizar os seguintes comandos ao criar o banco de dados:
 
 ``` sql
 CREATE DATABASE bancodedados
@@ -40,18 +40,18 @@ CREATE IF NOT EXISTS TABLE tabela (
 
 Note que:
 
-- AUTO_INCREMENT permite que o campo recebe valores automaticamente, de acordo com a inserção no banco e sem repetição;
+- AUTO_INCREMENT permite que o campo receba valores automaticamente, de acordo com a inserção de novos valores no banco e de forma que não haja repetição;
 - NOT NULL é utilizado para a variável não aceitar valores nulos;
 - O VARCHAR(n) recebe até n strings, enquanto o CHAR(n) completa os espaços em branco para uma string com tamanho n;
 - ENUM delimitou as valores que podem ser adicionados no campo;
-- Em DECIMAL(n,m) define o máximo de números que ficam a direita e a esquerda da vírgula. 
-- PRIMARY KEY() define uma chave primária, a principal identificadora das observações, dessa forma, não podem existir dois registros com o mesmo valor nesse campo;
+- Em DECIMAL(n,m) define o máximo de números que ficam à direita e à esquerda da vírgula. 
+- PRIMARY KEY() define uma chave primária, a principal identificadora das observações, dessa forma, não podem existir dois registros com o mesmo valor neste campo;
 
 Outras possibilidades de tipos para os campos são:
 
 ![Captura de Tela (127)](https://user-images.githubusercontent.com/57160675/167003960-6957a2b8-b5b8-4c48-8a3a-7fe7a9d5f936.png)
 
-Para conferir a estrutura final da tabela a partir do comando. Caso um banco de dados específico não esteja ativado, o nome da tabela também pode ser escrito na forma bancodedados.tabela .
+É possível conferir a estrutura final da tabela a partir do comando abaixo. Caso um banco de dados específico não esteja ativado, o nome da tabela também pode ser escrito na forma bancodedados.tabela .
 
 ``` sql
 DESCRIBE tabela; 
@@ -64,7 +64,7 @@ INSERT INTO tabela VALUES
 ('Carlos', '1999-02-16', 'M', '72.0', '1.85', 'Brasil');
 ```
 
-No caso de criar uma nova coluna na tabela. Por default, a nova coluna é adicionada na última posição, mas é possível alterar isso com o comando FIRST ou AFTER. Se já existem observações na tabela, a coluna será formada por valores nulos.
+Caso deseje criar uma nova coluna na tabela, os comandos a seguir podem ser utilizados. Por default, a nova coluna é adicionada na última posição, mas é possível alterar isso com o comando FIRST ou AFTER. Se já existem observações na tabela, a coluna será formada por valores nulos.
 
 ``` sql
 ALTER TABLE tabela
@@ -85,21 +85,21 @@ ALTER TABLE tabela
 CHANGE COLUMN profissao prof VARCHAR(20) NOT NULL DEFAULT '';
 ```
 
-Além de renomear a tabela:
+Além de renomear a tabela.
 
 ``` sql
 ALTER TABLE tabela
 RENAME TO nome_novo;
 ```
 
-Em caso de excluir uma coluna é possível utilizar:
+Em caso de excluir uma coluna é possível utilizar o seguinte comando.
 
 ``` sql
 ALTER TABLE tabela
 DROP COLUMN profissao;
 ```
 
-Se o interesse for alterar a informação de um campo em uma instância utiliza-se o comando mostrado abaixo.  LIMIT define o número de alterações que podem ocorrer com o comando, pode ser interessante para evitar futuros erros.
+Se o interesse for alterar a informação de um campo em uma instância utiliza-se o comando mostrado abaixo. LIMIT define o número de alterações que podem ocorrer com o comando, pode ser interessante para evitar futuros erros.
 
 ``` sql
 UPDATE tabela
@@ -108,7 +108,7 @@ WHERE id = "cod"
 LIMIT 1;
 ```
 
-Para excluir linhas de uma tabela pode ser utilizada a função DELETE, que também permite a o uso da função LIMIT. Ainda é possível exluir todas as instâncias de uma tabela com a função TRUNCATE, mas mantém a estrutura da tabela.
+Para excluir linhas de uma tabela pode ser utilizada a função DELETE, que também permite a o uso da função LIMIT. Ainda é possível excluir todas as instâncias de uma tabela com a função TRUNCATE, mas mantém a estrutura da tabela.
 
 ``` sql
 DELETE FROM tabela
@@ -116,7 +116,7 @@ WHERE column = "erro"
 LIMIT 3;
 ```
 
-E caso seja necessário apagar o banco de dados, é possível utilizar o comando (MAS MUITO CUIDADO COM ISSO):
+E caso seja necessário apagar o banco de dados, é possível utilizar o comando a seguir (MAS MUITO CUIDADO COM ISSO).
 
 ``` sql
 DROP DATABASE bancodedados; 
@@ -124,7 +124,7 @@ DROP DATABASE bancodedados;
 
 ## Seleção de Observações
 
-Com o comando SELECT é possível selecionar colunas e visualizá-las. Quando uitlizamos * todas as colunas são selecionadas.
+Com o comando SELECT é possível selecionar colunas e visualizá-las. Quando utilizamos * todas as colunas são selecionadas.
 
 ``` sql
 SELECT column 
@@ -134,7 +134,7 @@ SELECT *
 FROM tabela; 
 ```
 
-É possível implementar ainda a forma como essas informações serão mostradas, por exemplo ordenando a partir de algum valor. No primeiro exemplo é a versão crescente e a segunda decrescente. Também permite a ordenação a partir de mais de uma coluna
+É possível implementar ainda a forma como essas informações serão mostradas, por exemplo ordenando a partir de algum valor. No primeiro exemplo é a versão crescente e a segunda decrescente. Também permite a ordenação a partir de mais de uma coluna.
 
 ``` sql
 SELECT column FROM tabela
@@ -144,7 +144,7 @@ SELECT column FROM tabela
 ORDER BY column DESC; 
 ```
 
-Para filtrar as linhas é utilizada o comando WHERE. Os sinais que são utilizados para as inequações são =, <, <=, >, >= ou !=, além de outros comandos específicos. NO segundo exemplo a seleção ocorre para todos os valores presentes entre a sequência e no terceiro considera apenas os valores entre parênteses. Operadores lógicos também podem ser adicionados com AND e OR.
+Para filtrar as linhas é utilizado o comando WHERE. Os sinais que são utilizados para as inequações são =, <, <=, >, >= ou !=, além de outros comandos específicos. No segundo exemplo a seleção ocorre para todos os valores presentes entre a sequência e no terceiro considera apenas os valores entre parênteses. Operadores lógicos também podem ser adicionados com AND e OR.
 
 ``` sql
 SELECT column FROM tabela
@@ -160,7 +160,7 @@ SELECT column FROM tabela
 WHERE column > 5 AND column2 < 10; 
 ```
 
-O operador LIKE permite que a seleção seja feita observando padrões nas strings. O % indica a presença de qualquer outro caracter (inclusive o nenhum caracter), e pode ser posicionado no início, no final ou até no meio. Lembrando que o SQL não é case sensitve, e não faz distinção entre maiúsculo e minúsculo. No terceiro caso tudo é selecionado com exceção do que segue o padrão. Já o _ obriga que exista algum caracter na posição definada
+O operador LIKE permite que a seleção seja feita observando padrões nas strings. O % indica a presença de qualquer outro caracter (inclusive de nenhum caracter), e pode ser posicionado no início, no final ou até no meio. Lembrando que o SQL não é case sensitve, e não faz distinção entre maiúsculo e minúsculo. No terceiro caso tudo é selecionado com exceção do que segue o padrão. Já o _ obriga que exista algum caracter na posição definida.
 
 ``` sql
 SELECT column FROM tabela
@@ -176,7 +176,7 @@ SELECT column FROM tabela
 WHERE column LIKE 'P%_'; 
 ``` 
 
-O comando DISTINCT seleciona apenas os primeiros registros que possuem certa categoria.
+O comando DISTINCT seleciona apenas os primeiros registros que possuem certa categoria, de forma que as categorias não se repitam.
 
 ``` sql
 SELECT DISTINCT column FROM tabela; 
@@ -202,7 +202,7 @@ SELECT MAX(column) FROM tabela;
 SELECT SUM(column) FROM tabela; 
 ```
 
-Com o GROUP BY os comandos são aplicados considerando cada uma das categorias presente na coluna definada separadamente e um valor é calculado para cada. No primeiro exemplo o resultado mostra apenas as categorias existentes. No segundo comando, além de mostrar as classes, uma nova coluna é adicionada com o valor referente a cada classe. Após realizar um agrupamento, em caso de realizar um filtro nas categorias definidas, deve-se utilizar o HAVING.
+Com o GROUP BY os comandos são aplicados considerando cada uma das categorias presente na coluna definida separadamente e um valor é calculado para cada. No primeiro exemplo o resultado mostra apenas as categorias existentes. No segundo comando, além de mostrar as classes, uma nova coluna é adicionada com o valor referente a cada classe. Após realizar um agrupamento, em caso de realizar um filtro nas categorias definidas, deve-se utilizar o HAVING.
 
 ``` sql
 SELECT column FROM tabela
@@ -233,7 +233,7 @@ FROM tabela
 GROUP BY column; 
 ```
 
-Outras funções que permitam o tratamento dos dados podem ser observadas. Com o comando DATEPART pode ser realizada a extração de dados em datas. Enquanto CONCAT concatena strings e colunas. Os comandos UPPER e LOWER fazem com que todas as letras da string fiquem maiúsculas ou minúsculas, respectivamente. E para obter o tamanho da string, pode-se utilizar a função LEN. SUBSTRING permite a seleção de uma parte da string definida. E por fim, também é possível substituir um padrão por outro com REPLACE.
+Outras funções que permitam o tratamento dos dados podem ser observadas. Com o comando DATEPART pode ser realizada a extração de dados em datas. Enquanto o comando CONCAT concatena strings de colunas. Os comandos UPPER e LOWER fazem com que todas as letras da string fiquem maiúsculas ou minúsculas, respectivamente. E para obter o tamanho da string, pode-se utilizar a função LEN. SUBSTRING permite a seleção de uma parte da string definida. E por fim, também é possível substituir um padrão por outro com REPLACE.
 
 ```sql
 SELECT DATEPART(DAY, data) AS Dia, DATEPART(MONTH, data) AS Mes, DATEPART(YEAR, data) AS Ano
@@ -255,7 +255,7 @@ SELECT ProductNumber, REPLACE(ProductNumber, '-','#') AS Trocado
 FROM tabela
 ```
 
-Utilizando um SELECT dentro de outro SELECT. Nesse caso os valores utilizados para agrupar são apenas os maiores que a média geral. Também conhecido como subquery.
+Utilizando um SELECT dentro de outro SELECT. Nesse caso os valores utilizados para agrupar são apenas maiores que a média geral. Também conhecido como subquery.
 
 ```sql
 SELECT column, COUNT(*) FROM tabela
@@ -273,7 +273,7 @@ ADD FOREIGN KEY (idtabela2)
 REFERENCES tabela2(id);
 ```
 
-A junção entre dois bancos de dados pode ser feita da seguinte forma. Se o ON não é utilizado, todos os registros são ligados a todos os ids da segunda tabelas e existe uma repetição. É importante definir de qual tabela a coluna pertence para evitar que colunas com o mesmo nome sejam confudidas.
+A junção entre dois bancos de dados pode ser feita da seguinte forma. Se o ON não é utilizado, todos os registros são ligados a todos os ids da segunda tabelas e ocorre uma repetição. É importante definir de qual tabela a coluna pertence para evitar que colunas com o mesmo nome sejam confundidas.
 
 ```sql
 SELECT tabela1.id, tabela1.nome, tabela2.id, tabela2.info
@@ -285,7 +285,7 @@ Outros tipos de JOIN são:
 
 ![image](https://user-images.githubusercontent.com/57160675/167412801-2f57b694-7b6a-445d-8dda-51af46174415.png)
 
-Também é possível utilizar abreviações no comando, afim de diminuir o tamanho do código
+Também é possível utilizar abreviações no comando, afim de diminuir o tamanho do código.
 
 ```sql
 SELECT t1.id, t1.nome, t2.id, t2.info 
@@ -294,7 +294,7 @@ JOIN tabela2 t2
 ON t1.idtabela2 = t2.id;
 ```
 
-E para encadear uma nova junção 
+E para encadear uma nova junção, segue um novo exemplo:
 
 ```sql
 SELECT * FROM tabela1 t1
